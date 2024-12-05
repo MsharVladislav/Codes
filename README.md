@@ -1,2 +1,2 @@
 # Codes
-Codes for kurs project
+Тексты программ для курсовой работы.
