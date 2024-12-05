@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сделать заказ - SmithBakkery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #f8e6d3;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: #8b4513;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav {
+            float: right;
+        }
+
+        .nav-item {
+            display: inline-block;
+            margin-left: 20px;
+            color: #8b4513;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-item:hover {
+            background-color: #e6ccb3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .order-form {
+            background-color: #fff9f3;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #8b4513;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .submit-btn {
+            background-color: #8b4513;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #693610;
+        }
+
+        .orders-list {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .orders-list h2 {
+            color: #8b4513;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8e6d3;
+            color: #8b4513;
+        }
+
+        tr:hover {
+            background-color: #fff9f3;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                text-align: center;
+            }
+
+            .nav {
+                float: none;
+                margin-top: 15px;
+            }
+
+            .nav-item {
+                display: block;
+                margin: 10px 0;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/" class="logo">SmithBakkery</a>
+        <nav class="nav">
+            <a href="/reviews" class="nav-item">Отзывы о пекарне</a>
+            <a href="/news" class="nav-item">Новости о пекарне</a>
+            <a href="/menu" class="nav-item">Список выпечки</a>
+            <a href="/order" class="nav-item">Сделать заказ</a>
+            <a href="/models" class="nav-item">Модели базы данных</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="order-form">
+            <h2>Сделать заказ</h2>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="client_name">Ваше имя:</label>
+                    <input type="text" id="client_name" name="client_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pastry">Выпечка:</label>
+                    <select id="pastry" name="pastry" required>
+                        {% for pastry in pastries %}
+                        <option value="{{ pastry['id'] }}">{{ pastry['name'] }} ({{ pastry['price'] }} руб.)</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="baker">Пекарь:</label>
+                    <select id="baker" name="baker" required>
+                        {% for baker in bakers %}
+                        <option value="{{ baker['id'] }}">{{ baker['full_name'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="order_type">Тип заказа:</label>
+                    <select id="order_type" name="order_type" required>
+                        <option value="с собой">С собой</option>
+                        <option value="на месте">На месте</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="delivery"> Доставка
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn">Оформить заказ</button>
+            </form>
+        </div>
+
+        <div class="orders-list">
+            <h2>Текущие заказы</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Клиент</th>
+                        <th>Выпечка</th>
+                        <th>Пекарь</th>
+                        <th>Тип заказа</th>
+                        <th>Доставка</th>
+                        <th>Дата заказа</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order['client_name'] }}</td>
+                        <td>{{ order['pastry_name'] }}</td>
+                        <td>{{ order['baker_name'] }}</td>
+                        <td>{{ order['order_type'] }}</td>
+                        <td>{{ 'Да' if order['delivery'] else 'Нет' }}</td>
+                        <td>{{ order['order_date'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="orders-list">
+            <h2>Готовые заказы</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Клиент</th>
+                        <th>Выпечка</th>
+                        <th>Пекарь</th>
+                        <th>Тип заказа</th>
+                        <th>Доставка</th>
+                        <th>Дата заказа</th>
+                        <th>Дата готовности</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in completed_orders %}
+                    <tr>
+                        <td>{{ order['client_name'] }}</td>
+                        <td>{{ order['pastry_name'] }}</td>
+                        <td>{{ order['baker_name'] }}</td>
+                        <td>{{ order['order_type'] }}</td>
+                        <td>{{ 'Да' if order['delivery'] else 'Нет' }}</td>
+                        <td>{{ order['order_date'] }}</td>
+                        <td>{{ order['completion_date'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

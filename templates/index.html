@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmithBakkery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #f8e6d3;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: #8b4513;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav {
+            float: right;
+        }
+
+        .nav-item {
+            display: inline-block;
+            margin-left: 20px;
+            color: #8b4513;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-item:hover {
+            background-color: #e6ccb3;
+        }
+
+        .welcome {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #fff9f3;
+        }
+
+        .welcome h1 {
+            color: #8b4513;
+            margin-bottom: 20px;
+        }
+
+        .welcome p {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+
+        .facts-section {
+            background-color: #fff;
+            padding: 50px 20px;
+        }
+
+        .facts-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .fact-card {
+            background-color: #fff9f3;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .fact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .fact-card h3 {
+            color: #8b4513;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .fact-card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .facts-title {
+            text-align: center;
+            color: #8b4513;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                text-align: center;
+            }
+
+            .nav {
+                float: none;
+                margin-top: 15px;
+            }
+
+            .nav-item {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .facts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/" class="logo">SmithBakkery</a>
+        <nav class="nav">
+            <a href="/reviews" class="nav-item">Отзывы о пекарне</a>
+            <a href="/news" class="nav-item">Новости о пекарне</a>
+            <a href="/menu" class="nav-item">Список выпечки</a>
+            <a href="/order" class="nav-item">Сделать заказ</a>
+            <a href="/models" class="nav-item">Модели базы данных</a>
+        </nav>
+    </div>
+
+    <div class="welcome">
+        <h1>Добро пожаловать в SmithBakkery!</h1>
+        <p>Мы рады приветствовать вас в нашей уютной пекарне, где каждый день мы создаем свежую и вкусную выпечку. 
+           Наши опытные пекари вкладывают душу в каждое изделие, используя только натуральные ингредиенты и 
+           проверенные временем рецепты.</p>
+    </div>
+
+    <div class="facts-section">
+        <h2 class="facts-title">Интересные факты о выпечке</h2>
+        <div class="facts-container">
+            <div class="fact-card">
+                <h3>Круассан - символ победы</h3>
+                <p>Форма круассана была создана венскими пекарями в честь победы над турецкими войсками в 1683 году. 
+                   Полумесяц на флаге Османской империи вдохновил их на создание этой знаменитой выпечки.</p>
+            </div>
+
+            <div class="fact-card">
+                <h3>Древнейший хлеб</h3>
+                <p>Самому древнему хлебу, найденному археологами, около 14500 лет! Его остатки были обнаружены в Иордании. 
+                   Это открытие показало, что люди пекли хлеб еще до появления земледелия.</p>
+            </div>
+
+            <div class="fact-card">
+                <h3>Претцель - символ пекарей</h3>
+                <p>Форма претцеля символизирует руки, сложенные в молитве. В средневековой Европе эта выпечка была 
+                   символом пекарских гильдий и часто использовалась на их гербах.</p>
+            </div>
+
+            <div class="fact-card">
+                <h3>Первый тостер</h3>
+                <p>Первый электрический тостер был изобретен в 1893 году в Великобритании. Однако он поджаривал хлеб 
+                   только с одной стороны, и приходилось вручную переворачивать ломтики.</p>
+            </div>
+
+            <div class="fact-card">
+                <h3>Багет по закону</h3>
+                <p>Во Франции существует закон о багете, который определяет точный состав традиционного багета: мука, 
+                   вода, дрожжи и соль. Никаких консервантов!</p>
+            </div>
+
+            <div class="fact-card">
+                <h3>Пончики и космос</h3>
+                <p>NASA разработало специальные пончики для астронавтов с увеличенным сроком хранения и особой 
+                   структурой, чтобы крошки не попадали в оборудование космического корабля.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
